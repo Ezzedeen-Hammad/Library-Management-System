@@ -1,1 +1,5 @@
-
+43521|Python for Everyone|Cay Horstman:Rance Necaise|89.0|5|0
+67534|Exploring Data in Python|Charless Russell|67.3|5|0
+63254|The C Programming Language|Brian Kernighan:Dennis Ritchie|45.6|4|0
+32147|Learn C the Hard Way|Zed Shaw|20.9|2|0
+20014|Learn Python 3 the Hard Way|Zed Shaw|24.9|7|0

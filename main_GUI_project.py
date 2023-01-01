@@ -116,8 +116,7 @@ def readBorrowedInfo():
 def writeBorrowedInfo(borrowed):
     with open("borrowedInfo.txt", "w") as file:
         for info in borrowed:
-            file.write(
-                ([info["serial"], info["user"]]) + "\n")
+            file.write(([info["serial"], info["user"]]) + "\n")
 
 
 # Define the function that will be called when the button is clicked

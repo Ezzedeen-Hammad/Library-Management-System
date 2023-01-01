@@ -5,10 +5,6 @@ from tkinter import messagebox
 import os
 
 
-# Create the main window
-root = Tk()
-root.title("Library Management System")
-
 # Check if the file exists
 if not os.path.exists("booksInfo.txt"):
     # If the file does not exist, create the file and write some initial data to it
@@ -19,6 +15,11 @@ elif not os.path.exists("borrowedInfo.txt"):
     # If the file does not exist, create the file and write some initial data to it
     with open("borrowedInfo.txt", "w") as f:
         f.write()
+
+
+# Create the main window
+root = Tk()
+root.title("Library Management System")
 
 
 # function to check if a serial number is valid (5 digits)
@@ -116,7 +117,8 @@ def readBorrowedInfo():
 def writeBorrowedInfo(borrowed):
     with open("borrowedInfo.txt", "w") as file:
         for info in borrowed:
-            file.write(([info["serial"], info["user"]]) + "\n")
+            file.write(
+                ([info["serial"], info["user"]]) + "\n")
 
 
 # Define the function that will be called when the button is clicked
@@ -148,24 +150,28 @@ def searchBook():
     # Get the search term and search type from the entries
     term = searchEntry.get()
     search_type = searchType.get()
-    # Create an empty list to store the matching books
+    # Initialize a list to store the matching books
     matches = []
-    # Search for the books based on the search type
-    if search_type == "title":
-        # Search for books with a matching title
-        matches = [book for book in books if term.lower()
-                   in book["title"].lower()]
-    elif search_type == "author":
-        # Search for books with a matching author
-        matches = [book for book in books if any(
-            term.lower() in author.lower() for author in book["authors"])]
-    # Build the string containing the information for all matching books
+    # Iterate through the books
+    for book in books:
+        # Check if the search term matches the title
+        if (search_type == "title" and term.lower() in book["title"].lower()):
+            # If the search term matches, add the book to the list of matches
+            matches.append(book)
+            # Check if the search term matches the author
+        elif (search_type == "author" and term.lower() in book["authors"].lower()):
+            # If the search term matches, add the book to the list of matches
+            matches.append(book)
+    # Initialize a string to store the book information
     book_info = ""
+    # Iterate through the matching books
     for book in matches:
+        # Add the book's information to the string
         book_info += f"Serial number: {book['serial']}\nTitle: {book['title']}\nAuthors: {book['authors']}\nPrice: {book['price']}\nTotal copies: {book['available'] + book['borrowed']}\n\n"
-    # Display the book information in a message box
+    # If the book_info string is not empty, display it in a message box
     if book_info:
         messagebox.showinfo("Books", book_info)
+    # If the book_info string is empty, display an error message
     else:
         messagebox.showerror("Error", "No matching books found.")
 

@@ -129,13 +129,12 @@ def displayBooks():
     book_info = ""
     # Iterate over the list of books and build the string
     for book in books:
-        total_copies = int(book['available']) + int(book['borrowed'])
-        book_info += f"Serial number: {book['serial']}\nTitle: {book['title']}\nAuthors: {book['authors']}\nPrice: {book['price']}\nTotal copies: {str(total_copies)}\n\n"
+        book_info += f"Serial number: {book['serial']}\nTitle: {book['title']}\nAuthors: {book['authors']}\nPrice: {book['price']}\nTotal copies: {book['available'] + book['borrowed']}\n\n"
     # Display the book information in a message box
     messagebox.showinfo("Books", book_info)
 
 
-# Create the button,
+# Create the button
 button = Button(root, text="Display Books", command=displayBooks)
 button.pack()
 
@@ -168,8 +167,7 @@ def searchBook():
     # Iterate through the matching books
     for book in matches:
         # Add the book's information to the string
-        total_copies = int(book['available']) + int(book['borrowed'])
-        book_info += f"Serial number: {book['serial']}\nTitle: {book['title']}\nAuthors: {book['authors']}\nPrice: {book['price']}\nTotal copies: {str(total_copies)}\n\n"
+        book_info += f"Serial number: {book['serial']}\nTitle: {book['title']}\nAuthors: {book['authors']}\nPrice: {book['price']}\nTotal copies: {book['available'] + book['borrowed']}\n\n"
     # If the book_info string is not empty, display it in a message box
     if book_info:
         messagebox.showinfo("Books", book_info)
